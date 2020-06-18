@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3007",
     "build": "next build",
     "start": "next start"
   },
@@ -11,5 +11,10 @@
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.5.0",
+    "reactstrap": "^8.4.1",
+    "sass": "^1.26.8"
   }
 }
