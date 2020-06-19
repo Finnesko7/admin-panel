@@ -1,6 +1,9 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import Cors from 'cors'
+import corsMiddleware from "../../lib/middleware/cors-middleware";
 
-export default (req, res) => {
+export default async (req, res) => {
+  await corsMiddleware(req, res)
+
   res.statusCode = 200
-  res.json({ name: 'John Doe' })
+  res.json({ name: 'John Doe s' })
 }

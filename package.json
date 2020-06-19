@@ -8,8 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
     "next": "9.4.4",
     "react": "16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
