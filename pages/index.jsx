@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Cookies} from 'react-cookie';
 import Head from 'next/head';
+import Router from 'next/router';
 import {
     Button, Form,
     FormGroup, Label,
@@ -9,6 +10,7 @@ import {
     Card, CardBody,
     CardTitle,
 } from 'reactstrap';
+import api from "../config/api";
 
 const cookies = new Cookies();
 
@@ -17,16 +19,16 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     const sigin = async () => {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                login,
-                password
-            })
-        });
+        const response = await api('/api/login', {
+            login,
+            password
+        }, 'POST');
         const data = await response.json();
         cookies.set('token', data.token);
-        console.log(data.token);
+
+        if (data.token) {
+            // Router.push('/home');
+        }
     }
 
     return (
@@ -46,6 +48,7 @@ const Login = () => {
                                             <Label for="exampleEmail">Email</Label>
                                             <Input type="email" name="email" id="exampleEmail"
                                                    placeholder="example@mail.com"
+                                                   value={login}
                                                    onChange={((e) => {
                                                        setLogin(e.target.value)
                                                    })}
@@ -55,6 +58,7 @@ const Login = () => {
                                             <Label for="examplePassword">Password</Label>
                                             <Input type="password" name="password" id="examplePassword"
                                                    placeholder="Your password"
+                                                   value={password}
                                                    onChange={((e) => {
                                                        setPassword(e.target.value)
                                                    })}

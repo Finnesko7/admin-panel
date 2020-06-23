@@ -1,22 +1,18 @@
 import jwt from 'jsonwebtoken';
-const jwtSecret = "mysuperdupersecret";
-
-const token = jwt.sign({ "username": "Mike" }, jwtSecret, { expiresIn: 60 }) // 1 min token
 
 export default (req, res) => {
-
-    const t = req.headers.authorization;
-    console.log("authorization:", t);
+    console.log('req.header.Authentication', req.headers.authentication)
 
     let success = false;
     let data = JSON.parse(req.body);
+    let token = jwt.sign( { "username": `${data.login}` }, process.env.jwtSecret, { expiresIn: 60 })
+
     if (data.login === "admin" && data.password === "admin") {
         success = true;
     }
 
     res.json({'token' : success ? token : false})
 }
-
 
 export const config = {
     api: {
