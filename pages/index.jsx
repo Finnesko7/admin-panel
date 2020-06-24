@@ -27,7 +27,7 @@ const Login = () => {
         cookies.set('token', data.token);
 
         if (data.token) {
-            // Router.push('/home');
+            Router.push('/home');
         }
     }
 
@@ -52,6 +52,9 @@ const Login = () => {
                                                    onChange={((e) => {
                                                        setLogin(e.target.value)
                                                    })}
+                                                   onKeyPress={(e) => {
+                                                       if (e.key === 'Enter') sigin()
+                                                   }}
                                             />
                                         </FormGroup>
                                         <FormGroup>
@@ -62,6 +65,9 @@ const Login = () => {
                                                    onChange={((e) => {
                                                        setPassword(e.target.value)
                                                    })}
+                                                   onKeyPress={(e) => {
+                                                       if (e.key === 'Enter') sigin()
+                                                   }}
                                             />
                                         </FormGroup>
 
