@@ -19,14 +19,13 @@ const Home = () => (
             <Sidebar/>
             <div className="app-main__outer">
                 <div className="app-main__inner">
-                    <ReactCSSTransitionGroup
-                        component="div"
-                        transitionName="TabsAnimation"
-                        transitionAppear={true}
-                        transitionAppearTimeout={0}
-                        transitionEnter={false}
-                    >
-                        <Row className="login-form  ">
+                    {/*<ReactCSSTransitionGroup*/}
+                    {/*    component="div"*/}
+                    {/*    transitionName="TabsAnimation"*/}
+                    {/*    transitionAppear={true}*/}
+                    {/*    transitionAppearTimeout={0}*/}
+                    {/*    transitionEnter={false}*/}
+                    {/*>*/}
                             <Col md="12">
                                 <Card className="main-card">
                                     <CardBody>
@@ -35,26 +34,81 @@ const Home = () => (
                                 </Card>
                             </Col>
 
-                            <Col md="3">
-                                <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
-                                    <div className="icon-wrapper rounded">
-                                        <div className="icon-wrapper-bg bg-white opacity-10"/>
-                                        <i className="lnr-screen icon-gradient bg-warm-flame"/>
+                            <div className="panel-welcome">
+                                <Col md="3">
+                                    <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
+                                        <div className="icon-wrapper rounded">
+                                            <div className="icon-wrapper-bg bg-white opacity-10"/>
+                                            <i className="lnr-screen icon-gradient bg-warm-flame"/>
+                                        </div>
+                                        <div className="widget-numbers">
+                                            17.2k
+                                        </div>
+                                        <div className="widget-subheading">
+                                            Активных новостроек
+                                        </div>
+                                        <div className="widget-description text-white">
+                                            <span className="pr-1">62,7%</span>
+                                            <FontAwesomeIcon icon={faArrowLeft}/>
+                                        </div>
                                     </div>
-                                    <div className="widget-numbers">
-                                        17.2k
+                                </Col>
+                                <Col md="3">
+                                    <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
+                                        <div className="icon-wrapper rounded">
+                                            <div className="icon-wrapper-bg bg-white opacity-10"/>
+                                            <i className="lnr-screen icon-gradient bg-warm-flame"/>
+                                        </div>
+                                        <div className="widget-numbers">
+                                            17.2k
+                                        </div>
+                                        <div className="widget-subheading">
+                                            Активных новостроек
+                                        </div>
+                                        <div className="widget-description text-white">
+                                            <span className="pr-1">62,7%</span>
+                                            <FontAwesomeIcon icon={faArrowLeft}/>
+                                        </div>
                                     </div>
-                                    <div className="widget-subheading">
-                                        Активных новостроек
+                                </Col>
+                                <Col md="3">
+                                    <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
+                                        <div className="icon-wrapper rounded">
+                                            <div className="icon-wrapper-bg bg-white opacity-10"/>
+                                            <i className="lnr-screen icon-gradient bg-warm-flame"/>
+                                        </div>
+                                        <div className="widget-numbers">
+                                            17.2k
+                                        </div>
+                                        <div className="widget-subheading">
+                                            Активных новостроек
+                                        </div>
+                                        <div className="widget-description text-white">
+                                            <span className="pr-1">62,7%</span>
+                                            <FontAwesomeIcon icon={faArrowLeft}/>
+                                        </div>
                                     </div>
-                                    <div className="widget-description text-white">
-                                        <span className="pr-1">62,7%</span>
-                                        <FontAwesomeIcon icon={faArrowLeft}/>
+                                </Col>
+                                <Col md="3">
+                                    <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
+                                        <div className="icon-wrapper rounded">
+                                            <div className="icon-wrapper-bg bg-white opacity-10"/>
+                                            <i className="lnr-screen icon-gradient bg-warm-flame"/>
+                                        </div>
+                                        <div className="widget-numbers">
+                                            17.2k
+                                        </div>
+                                        <div className="widget-subheading">
+                                            Активных новостроек
+                                        </div>
+                                        <div className="widget-description text-white">
+                                            <span className="pr-1">62,7%</span>
+                                            <FontAwesomeIcon icon={faArrowLeft}/>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </ReactCSSTransitionGroup>
+                                </Col>
+                            </div>
+                    {/*</ReactCSSTransitionGroup>*/}
                 </div>
             </div>
         </div>
