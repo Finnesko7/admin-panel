@@ -1,13 +1,12 @@
 import React from "react";
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
     faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import {
-    Row, Col, Card, CardBody, CardTitle, Form, FormGroup, Label, Input, Button
+    Col, Card, CardBody
 } from 'reactstrap';
 
 
@@ -19,13 +18,6 @@ const Home = () => (
             <Sidebar/>
             <div className="app-main__outer">
                 <div className="app-main__inner">
-                    {/*<ReactCSSTransitionGroup*/}
-                    {/*    component="div"*/}
-                    {/*    transitionName="TabsAnimation"*/}
-                    {/*    transitionAppear={true}*/}
-                    {/*    transitionAppearTimeout={0}*/}
-                    {/*    transitionEnter={false}*/}
-                    {/*>*/}
                             <Col md="12">
                                 <Card className="main-card">
                                     <CardBody>
@@ -108,7 +100,6 @@ const Home = () => (
                                     </div>
                                 </Col>
                             </div>
-                    {/*</ReactCSSTransitionGroup>*/}
                 </div>
             </div>
         </div>

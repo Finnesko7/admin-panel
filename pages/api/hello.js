@@ -1,5 +1,3 @@
-import Cors from 'cors'
-import corsMiddleware from "../../lib/middleware/cors-middleware";
 import authMiddleware from "../../lib/middleware/auth-middleware";
 
 export default async (req, res, next) => {

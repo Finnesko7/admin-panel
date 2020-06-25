@@ -24,7 +24,8 @@ const Login = () => {
             password
         }, 'POST');
         const data = await response.json();
-        cookies.set('token', data.token);
+        console.log("Your token:", data.token )
+        cookies.set('admin-atlanta', data.token);
 
         if (data.token) {
             Router.push('/home');
