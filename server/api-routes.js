@@ -1,10 +1,12 @@
-import jwt from 'jsonwebtoken';
 
+const {Router} = require('express')
+const router = Router()
+const jwt = require('jsonwebtoken');
 
-export default async (req, res) => {
-    console.log("start")
+router.post('/api/login', (req, res) => {
     let success = false;
-    let data = JSON.parse(req.body);
+    let data = req.body;
+    console.log('req.body >>>>>>>>>>>>>>> ', data)
     let token = jwt.sign( { "username": `${data.login}` }, process.env.jwtSecret, { expiresIn: 60 })
 
     if (data.login === "admin" && data.password === "admin") {
@@ -12,10 +14,6 @@ export default async (req, res) => {
     }
 
     res.json({'token' : success ? token : false})
-}
+})
 
-export const config = {
-    api: {
-        bodyParser: true,
-    }
-}
+module.exports = router

@@ -24,6 +24,7 @@ const Login = () => {
             password
         }, 'POST');
         const data = await response.json();
+        console.log(data);
         console.log("Your token:", data.token )
         cookies.set('admin-atlanta', data.token);
 
