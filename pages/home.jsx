@@ -9,8 +9,6 @@ import {
     Col, Card, CardBody
 } from 'reactstrap';
 
-
-
 const Home = () => (
     <div className="app-container app-theme-white fixed-header fixed-sidebar fixed-footer">
         <Header/>

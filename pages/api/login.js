@@ -18,7 +18,7 @@ export default async (req, res) => {
     const {login, password} = req.body;
     const [user] = await User.find({email: login});
 
-    if (user.id) {
+    if (user && user.id) {
         token = await getToken(password, user)
     }
 
