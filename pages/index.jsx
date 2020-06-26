@@ -20,8 +20,8 @@ const Login = () => {
 
     const sigin = async () => {
         const response = await api('/api/login', {
-            login,
-            password
+         login,
+         password
         }, 'POST');
         const data = await response.json();
         console.log("Your token:", data.token )

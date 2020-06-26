@@ -8,7 +8,8 @@ const api = (url, data, method = 'GET') => fetch(url, {
     cache: 'no-cache',
     body: JSON.stringify(data),
     headers: {
-        Authentication: cookies.get('admin-atlanta')
+        'Content-Type': 'application/json',
+        'Authentication': cookies.get('admin-atlanta')
     }
 })
 
