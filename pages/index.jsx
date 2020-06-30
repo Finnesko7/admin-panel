@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useRef} from 'react';
 import {Cookies} from 'react-cookie';
 import Head from 'next/head';
 import Router from 'next/router';
@@ -15,13 +15,13 @@ import api from "../config/api";
 const cookies = new Cookies();
 
 const Login = () => {
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
+    const Login = useRef('');
+    const Password = useRef('')
 
     const sigin = async () => {
         const response = await api('/api/login', {
-         login,
-         password
+         login: Login.current.value,
+         password: Password.current.value
         }, 'POST');
         const data = await response.json();
         console.log("Your token:", data.token )
@@ -49,10 +49,7 @@ const Login = () => {
                                             <Label for="exampleEmail">Email</Label>
                                             <Input type="email" name="email" id="exampleEmail"
                                                    placeholder="example@mail.com"
-                                                   value={login}
-                                                   onChange={((e) => {
-                                                       setLogin(e.target.value)
-                                                   })}
+                                                   innerRef={Login}
                                                    onKeyPress={(e) => {
                                                        if (e.key === 'Enter') sigin()
                                                    }}
@@ -62,10 +59,7 @@ const Login = () => {
                                             <Label for="examplePassword">Password</Label>
                                             <Input type="password" name="password" id="examplePassword"
                                                    placeholder="Your password"
-                                                   value={password}
-                                                   onChange={((e) => {
-                                                       setPassword(e.target.value)
-                                                   })}
+                                                   innerRef={Password}
                                                    onKeyPress={(e) => {
                                                        if (e.key === 'Enter') sigin()
                                                    }}
