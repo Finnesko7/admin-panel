@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import mongoConnect from '../../config/db';
-import User from "../../models/user";
+import {mongoConnect} from '../../config/db';
+import User from "../../models/User";
 import bcrypt from 'bcrypt';
 
 export const config = {
