@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {mongoConnect} from '../../config/db';
+import {mongoConnect, mySqlConnect} from '../../config/db';
 import User from "../../models/User";
 import bcrypt from 'bcrypt';
 
@@ -13,6 +13,7 @@ export const config = {
 export default async (req, res) => {
 
     await mongoConnect()
+    await mySqlConnect()
 
     let token = null;
     const {login, password} = req.body;

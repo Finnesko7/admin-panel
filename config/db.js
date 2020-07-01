@@ -1,8 +1,20 @@
 import mongoose from 'mongoose';
+import {Sequelize} from 'sequelize';
 
-const knex = require('knex');
-const config = require('../knexfile');
-const mySqlConnect = knex(config.development);
+const sequelize = new Sequelize('rest_atlanta__db', 'root', 'password', {
+    host: 'localhost',
+    port: 33060,
+    dialect: 'mysql'
+})
+
+const mySqlConnect = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (e) {
+        console.error('Unable to connect to the database:', e);
+    }
+}
 
 
 const mongoConnect = async () => {
