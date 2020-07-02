@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const MainNav = [
     {
         icon: 'pe-7s-graph2',
@@ -30,7 +32,7 @@ export const HrNav = [
     {
         icon: 'pe-7s-users',
         label: 'Список кандидатов',
-        to: '/candidates',
+        to: '/candidates/all',
     },
     {
         icon: 'pe-7s-id',

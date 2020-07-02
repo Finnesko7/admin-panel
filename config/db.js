@@ -29,5 +29,6 @@ const mongoConnect = async () => {
 
 module.exports = {
     mongoConnect: mongoConnect,
-    mySqlConnect: mySqlConnect
+    mySqlConnect: mySqlConnect,
+    sequelize: sequelize
 }

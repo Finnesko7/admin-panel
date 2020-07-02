@@ -1,16 +1,36 @@
-const {mySqlConnect: db} = require('../config/db')
-const table = 'rc'
+const {DataTypes, Model} = require('sequelize')
+const {sequelize} = require('../config/db')
 
-export const all = () => {
-    return db.select('*').from(table).then((data) => data).finally(() => db.destroy())
-}
+const RealtyComplex = sequelize.define('RealtyComplex', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
+    name_ru: {
+        type: DataTypes.STRING
+    },
+    address_ru: {
+        type: DataTypes.STRING
+    },
+    name_ua: {
+        type: DataTypes.STRING
+    },
+    address_ua: {
+        type: DataTypes.STRING
+    },
+    short_description_ua: {
+        type: DataTypes.STRING
+    },
+    short_description_ru: {
+        type: DataTypes.STRING
+    },
 
-export const count = (active = true) => {
-    const model =  db.count({count: 'id'}).from(table)
+    createdAt: {type: DataTypes.DATE, field: 'created_at'},
+    updatedAt: {type: DataTypes.DATE, field: 'updated_at'},
+    deleteAt: {type: DataTypes.DATE, field: 'deleted_at'}
+}, {
+    tableName: 'rc',
+    paranoid: false
+});
 
-    if (active) {
-        model.whereNull('deleted_at')
-    }
-
-    return model.then((data) => data)
-}
+module.exports = RealtyComplex;

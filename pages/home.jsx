@@ -1,10 +1,10 @@
 import React from "react";
-import {count} from "../models/RealtyComplex"
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
 import {
     Col, Card, CardBody
 } from 'reactstrap';
+import RealtyComplexRepository from "../repository/RealtyComplexRepository";
 
 const Home = ({totalRc}) => {
 
@@ -47,11 +47,11 @@ const Home = ({totalRc}) => {
 }
 
 export async function getServerSideProps(context) {
-    const [rc] = await count();
+    const [rc] = await RealtyComplexRepository.getCountRc()
 
     return {
         props: {
-            totalRc: rc.count
+            totalRc: rc.dataValues.count
         }
     }
 }

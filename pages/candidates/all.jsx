@@ -11,7 +11,7 @@ const AllCandidates = () => {
                 <Sidebar/>
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-
+                        Candidates
                     </div>
                 </div>
             </div>
