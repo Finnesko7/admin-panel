@@ -1,5 +1,6 @@
 module.exports = {
     env: {
+        tokenExpaires: 6000, //sec
         jwtSecret: 'X3Hdvf8r435348fgfghgDSF',
         MONGODB_URI: 'mongodb+srv://finnesko:64v5Jbb3t5UhsGu@example-express-g0sqn.mongodb.net/atlanta-admin?retryWrites=true&w=majority',
         DB_NAME: 'rest_atlanta__db',

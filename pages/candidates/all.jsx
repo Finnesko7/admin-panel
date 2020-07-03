@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/layout/Header";
 import Sidebar from "../../components/layout/Sidebar";
-import {Card, CardBody, Col} from "reactstrap";
+import TableCandidates from "../../components/TableCandidates";
 
 const AllCandidates = () => {
     return (
@@ -11,7 +11,7 @@ const AllCandidates = () => {
                 <Sidebar/>
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-                        Candidates
+                        <TableCandidates/>
                     </div>
                 </div>
             </div>

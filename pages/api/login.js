@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
-import {mongoConnect, mySqlConnect} from '../../config/db';
+import {mongoConnect} from '../../config/db';
 import User from "../../models/User";
 import bcrypt from 'bcrypt';
-import RealtyComplexRepository from '../../repository/RealtyComplexRepository'
 
 export const config = {
     api: {
@@ -32,7 +31,7 @@ const getToken = (password, user) => {
             if (err) reject(err)
 
             if (result) {
-                resolve(jwt.sign({"userId": `${user.id}`}, process.env.jwtSecret, {expiresIn: 60}));
+                resolve(jwt.sign({"userId": `${user.id}`}, process.env.jwtSecret, {expiresIn: process.env.tokenExpaires}));
             }
         });
     })
