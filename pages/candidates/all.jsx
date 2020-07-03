@@ -31,15 +31,14 @@ const paginate = ({ page, pageSize }) => {
 };
 
 export async function getStaticProps() {
-    console.log("START ...........................................")
-    const candidates = await api('http://localhost:4001/candidates/all')
-    console.log("candidates: ", candidates)
+    const res = await api('http://localhost:4001/api/candidates')
+    const candidates = await res.json()
+
+    console.log("candidates", candidates)
 
     return {
         props: {
-            candidates: {
-                title: 'test'
-            }
+            candidates
         }
     }
 }
