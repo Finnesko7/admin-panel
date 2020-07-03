@@ -1,8 +1,7 @@
 import React from "react";
-import DefaultTable from "./utils/DefaultTable";
-import {Row, Col, Card, CardBody, CardTitle} from "reactstrap";
+import {Row, Col, Card, CardBody, CardTitle, Table} from "reactstrap";
 
-const TableCandidates = () => {
+function TableCandidates ({candidates})  {
 
     const fields =  [
         'Дата создания',
@@ -14,15 +13,27 @@ const TableCandidates = () => {
         'Action'
     ];
 
-    console.log("fields >>> ", )
-
     return (
         <Row>
             <Col lg="12">
                 <Card className="main-card mb-3">
                     <CardBody>
                         <CardTitle>Список кандидатов</CardTitle>
-                        <DefaultTable fields={fields}/>
+                        <Table hover className="mb-0">
+                            <thead>
+                            <tr>
+                                {fields.map(field => <th>{field}</th>)}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            </tbody>
+                        </Table>
                     </CardBody>
                 </Card>
             </Col>

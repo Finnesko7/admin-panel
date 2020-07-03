@@ -46,7 +46,7 @@ const Home = ({totalRc}) => {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     const [rc] = await RealtyComplexRepository.getCountRc()
 
     return {
