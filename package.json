@@ -28,11 +28,11 @@
     "react-hamburgers": "^1.0.0",
     "react-metismenu": "^1.4.0",
     "react-perfect-scrollbar": "^1.5.8",
+    "reactstrap": "^8.5.1",
     "sequelize": "^6.2.4"
   },
   "devDependencies": {
     "bootstrap": "^4.5.0",
-    "reactstrap": "^8.4.1",
     "sass": "^1.26.8"
   }
 }

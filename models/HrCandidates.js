@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize')
 const {sequelize} = require('../config/db')
 
-const HrCandidates = sequelize.define('HrCandidates', {
+const HrCandidates = sequelize.define('hr_candidates', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true
@@ -10,6 +10,7 @@ const HrCandidates = sequelize.define('HrCandidates', {
     name: {type: DataTypes.STRING},
     soname: {type: DataTypes.STRING},
     email: {type: DataTypes.STRING},
+    phone: {type: DataTypes.STRING},
     candidate_category_id: {type: DataTypes.INTEGER},
     source: {type: DataTypes.BOOLEAN},
     comments: {type: DataTypes.STRING},

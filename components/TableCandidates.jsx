@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Row, Col, Card, CardBody, CardTitle, Table} from "reactstrap";
+import api from "../config/api";
 
-function TableCandidates ({candidates})  {
+const getCandidates = async (page, pageSize) => {
+    const res = await api(`http://localhost:4001/api/candidates?page=${page}&pageSize=${pageSize}`)
+    const candidates = await res.json()
 
-    const fields =  [
+    console.log("candidates", candidates)
+
+    return candidates;
+}
+
+function TableCandidates() {
+
+    const [candidates, setCandidates] = useState([])
+
+    const fields = [
         'Дата создания',
         'ФИО',
         'Phone',
@@ -12,6 +24,12 @@ function TableCandidates ({candidates})  {
         'Test result',
         'Action'
     ];
+
+    useEffect(() => {
+        getCandidates(1, 10).then(data => {
+            setCandidates(data.candidates)
+        })
+    }, [setCandidates])
 
     return (
         <Row>
@@ -26,12 +44,16 @@ function TableCandidates ({candidates})  {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
+                            {candidates.map(candidate => {
+                                return (<tr>
+                                    <th scope="row">{candidate.id}</th>
+                                    <td>
+                                        {`${candidate.name} ${candidate.soname}`}
+                                    </td>
+                                    <td>{candidate.phone}</td>
+                                    <td>{candidate.email}</td>
+                                </tr>)
+                            })}
                             </tbody>
                         </Table>
                     </CardBody>
