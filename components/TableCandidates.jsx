@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {Row, Col, Card, CardBody, CardTitle, Table} from "reactstrap";
 import api from "../config/api";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCloudDownloadAlt, faFilePdf, faAddressCard, faTrash} from '@fortawesome/free-solid-svg-icons'
+import Pagination from "./utils/Pagination";
+
+const pageSize = 10;
 
 const getCandidates = async (page, pageSize) => {
     const res = await api(`http://localhost:4001/api/candidates?page=${page}&pageSize=${pageSize}`)
     const candidates = await res.json()
-
-    console.log("candidates", candidates)
 
     return candidates;
 }
@@ -14,22 +17,32 @@ const getCandidates = async (page, pageSize) => {
 function TableCandidates() {
 
     const [candidates, setCandidates] = useState([])
+    const [page, setPage] = useState(1)
+    const number = useRef(0);
 
     const fields = [
         'Дата создания',
         'ФИО',
         'Phone',
         'Email',
-        'Position',
-        'Test result',
-        'Action'
+        'Должность',
+        <FontAwesomeIcon icon={faFilePdf}/>,
+        ''
     ];
 
     useEffect(() => {
-        getCandidates(1, 10).then(data => {
+        getCandidates(page, pageSize).then(data => {
+
+            data.candidates.countPages = data.countPages;
+            number.current = Number((page - 1) * pageSize + 1);
             setCandidates(data.candidates)
         })
-    }, [setCandidates])
+    }, [setCandidates, page])
+
+    const changePage = (page) => {
+        console.log("change page ...", page)
+        setPage(page)
+    }
 
     return (
         <Row>
@@ -40,23 +53,37 @@ function TableCandidates() {
                         <Table hover className="mb-0">
                             <thead>
                             <tr>
-                                {fields.map(field => <th>{field}</th>)}
+                                {fields.map((field, key) => <th key={key}>{field}</th>)}
                             </tr>
                             </thead>
                             <tbody>
                             {candidates.map(candidate => {
-                                return (<tr>
-                                    <th scope="row">{candidate.id}</th>
+                                return (<tr key={candidate.id}>
+                                    <th scope="row">{number.current++}</th>
                                     <td>
                                         {`${candidate.name} ${candidate.soname}`}
                                     </td>
                                     <td>{candidate.phone}</td>
                                     <td>{candidate.email}</td>
+                                    <td>{candidate.category.name}</td>
+                                    <td>
+                                        <a href="#" title=" Результат тестов"><FontAwesomeIcon
+                                            icon={faCloudDownloadAlt}/></a>
+                                    </td>
+                                    <td>
+                                        <span className="icon-pointer"><FontAwesomeIcon icon={faAddressCard} color="gray"/> </span>
+                                        &nbsp;
+                                        <span className="icon-pointer"><FontAwesomeIcon icon={faTrash} color="Tomato"/> </span>
+                                    </td>
                                 </tr>)
                             })}
+
                             </tbody>
                         </Table>
                     </CardBody>
+                    <Row className="justify-content-center">
+                        <Pagination callback={changePage} countPages={candidates.countPages} currentPage={page}/>
+                    </Row>
                 </Card>
             </Col>
         </Row>

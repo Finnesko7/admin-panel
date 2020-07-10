@@ -66,8 +66,8 @@ const Login = () => {
                                             />
                                         </FormGroup>
 
-                                        <Button color="primary pull-right" className="mt-1"
-                                                onClick={sigin}>Submit</Button>
+                                        <Button color="primary pull-right"
+                                                onClick={sigin}>Sign in</Button>
                                     </Form>
                                 </CardBody>
                             </Card>

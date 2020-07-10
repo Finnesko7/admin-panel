@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize')
 const {sequelize} = require('../config/db')
+const HrCandidatesCategories = require('./HrCadidatesCatigories')
 
 const HrCandidates = sequelize.define('hr_candidates', {
     id: {
@@ -21,5 +22,9 @@ const HrCandidates = sequelize.define('hr_candidates', {
     tableName: 'hr_candidates',
     paranoid: false,
 });
+
+HrCandidates.belongsTo(HrCandidatesCategories, {
+    foreignKey: 'candidate_category_id'
+})
 
 module.exports = HrCandidates;

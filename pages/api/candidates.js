@@ -1,9 +1,9 @@
 import HrCandidates from '../../models/HrCandidates'
+import HrCadidatesCatigories from '../../models/HrCadidatesCatigories'
 
 const paginate = ({ page, pageSize }) => {
-    console.log(" >>>>>>>>> ", page, pageSize)
-    const offset = (page - 1) * pageSize;
-    const limit = pageSize;
+    const offset = Number((page - 1) * pageSize);
+    const limit = Number(pageSize);
 
     return {
         offset,
@@ -12,14 +12,18 @@ const paginate = ({ page, pageSize }) => {
 };
 
 
-
 export default async (req, res) => {
 
-    // const {query: {page, pageSize}} = req;
+    const {query: {page, pageSize}} = req;
     const candidates = await HrCandidates.findAll({
         order: [['id', 'DESC']],
-        ...paginate({page: 1, pageSize: 10})
+        ...paginate({page, pageSize}),
+        include: HrCadidatesCatigories
     })
 
-    res.json({candidates})
+    const total = await HrCandidates.count()
+    const countPages = Math.ceil(Number(total/pageSize));
+
+
+    res.json({countPages, candidates})
 }

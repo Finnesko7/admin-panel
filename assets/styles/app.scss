@@ -20,5 +20,28 @@
 .panel-welcome {
   margin-top: 10px;
   display: flex;
+}
 
+table {
+  tbody {
+    tr {
+      td {
+        .icon-pointer:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.pagination {
+  li {
+    a {
+      color: #243b55;
+    }
+
+    .active {
+      background-color: #e9ecef;
+    }
+  }
 }
