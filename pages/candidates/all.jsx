@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/layout/Header";
 import Sidebar from "../../components/layout/Sidebar";
-import TableCandidates from "../../components/TableCandidates";
+import CandidateTable from "../../components/CandidateTable";
 
 const AllCandidates = () => {
     return (
@@ -11,7 +11,7 @@ const AllCandidates = () => {
                 <Sidebar/>
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-                        <TableCandidates />
+                        <CandidateTable />
                     </div>
                 </div>
             </div>
