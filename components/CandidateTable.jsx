@@ -1,10 +1,15 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, Suspense} from "react";
 import {Row, Col, Card, CardBody, CardTitle, Table} from "reactstrap";
 import api from "../config/api";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCloudDownloadAlt, faFilePdf, faAddressCard, faTrash} from '@fortawesome/free-solid-svg-icons'
 import Pagination from "./utils/Pagination";
+import dynamic from "next/dynamic";
 
+const ModalCandidate = dynamic(() => import('./CandidateModal'), {
+    loading: () => <p>Loading ...</p>,
+    ssr: false
+})
 const pageSize = 10;
 
 const getCandidates = async (page, pageSize) => {
@@ -17,10 +22,9 @@ const getCandidates = async (page, pageSize) => {
 function CandidateTable() {
 
     const [candidates, setCandidates] = useState([])
-    const [modal, setModal] = useState(null)
+    const [showModal, setShowModal] = useState(false)
     const [page, setPage] = useState(1)
     const number = useRef(1);
-
     const fields = [
         'Дата создания',
         'ФИО',
@@ -42,14 +46,12 @@ function CandidateTable() {
         setPage(page)
     }
 
-    const showCandidate = () => {
+    const showCandidate = (show = true) => {
         console.log("show user card")
-
-        import('./CandidateModal').then(module => setModal(module.default))
+        setShowModal(show)
     }
 
     number.current = Number((page - 1) * pageSize + 1);
-    const Modal = modal;
 
     return (
         <>
@@ -87,7 +89,6 @@ function CandidateTable() {
                                         </td>
                                     </tr>)
                                 })}
-
                                 </tbody>
                             </Table>
                         </CardBody>
@@ -97,6 +98,7 @@ function CandidateTable() {
                     </Card>
                 </Col>
             </Row>
+            {showModal && <ModalCandidate cbCloseModal={showCandidate}/>}
         </>
     )
 }
