@@ -13,7 +13,7 @@ const ModalCandidate = dynamic(() => import('./CandidateModal'), {
 const pageSize = 10;
 
 const getCandidates = async (page, pageSize) => {
-    const res = await api(`http://localhost:4001/api/candidates?page=${page}&pageSize=${pageSize}`)
+    const res = await api(`/api/candidates?page=${page}&pageSize=${pageSize}`)
     const candidates = await res.json()
 
     return candidates;

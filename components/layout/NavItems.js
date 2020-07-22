@@ -45,7 +45,7 @@ export const NewBuild = [
     {
         icon: 'pe-7s-home',
         label: 'Все новостройки',
-        to: '#/charts/chartjs',
+        to: '/rc/all',
     },
     {
         icon: 'pe-7s-keypad',

@@ -1,8 +1,7 @@
 const {DataTypes} = require('sequelize')
 const {sequelize} = require('../config/db')
-const RealtyComplexDeveloper = require('./RealtyComplexDeveloper')
 
-const RealtyComplex = sequelize.define('RealtyComplex', {
+const RealtyComplexDeveloper = sequelize.define('rcDeveloper', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true
@@ -10,19 +9,13 @@ const RealtyComplex = sequelize.define('RealtyComplex', {
     name_ru: {
         type: DataTypes.STRING
     },
-    address_ru: {
-        type: DataTypes.STRING
-    },
     name_ua: {
         type: DataTypes.STRING
     },
-    address_ua: {
-        type: DataTypes.STRING
+    image_id: {
+        type: DataTypes.INTEGER
     },
-    short_description_ua: {
-        type: DataTypes.STRING
-    },
-    short_description_ru: {
+    site: {
         type: DataTypes.STRING
     },
     alias: {
@@ -31,20 +24,12 @@ const RealtyComplex = sequelize.define('RealtyComplex', {
     is_active: {
         type: DataTypes.BOOLEAN
     },
-    rc_developer_id: {
-        type: DataTypes.INTEGER
-    },
 
     createdAt: {type: DataTypes.DATE, field: 'created_at'},
     updatedAt: {type: DataTypes.DATE, field: 'updated_at'},
     deleteAt: {type: DataTypes.DATE, field: 'deleted_at'}
 }, {
-    tableName: 'rc',
-    paranoid: false
+    tableName: 'rc_developer'
 });
 
-RealtyComplex.belongsTo(RealtyComplexDeveloper, {
-    foreignKey: 'rc_developer_id'
-})
-
-module.exports = RealtyComplex;
+module.exports = RealtyComplexDeveloper;

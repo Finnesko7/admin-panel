@@ -1,15 +1,6 @@
 import HrCandidates from '../../models/HrCandidates'
 import HrCadidatesCatigories from '../../models/HrCadidatesCatigories'
-
-const paginate = ({ page, pageSize }) => {
-    const offset = Number((page - 1) * pageSize);
-    const limit = Number(pageSize);
-
-    return {
-        offset,
-        limit,
-    };
-};
+import paginate from "../../lib/calcPagination";
 
 
 export default async (req, res) => {
