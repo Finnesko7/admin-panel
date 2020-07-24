@@ -1,8 +1,7 @@
 import React from "react";
 import Header from "../../components/layout/Header";
 import Sidebar from "../../components/layout/Sidebar";
-import RcTable from "../../components/rc/RcTable";
-import RcSearchPanel from "../../components/rc/RcSearchPanel";
+import RcSingle from "../../components/rc/RcSingle";
 
 
 const AllRealtyComplex = () => {
@@ -14,8 +13,7 @@ const AllRealtyComplex = () => {
 
                 <div className="app-main__outer">
                     <div className="app-main__inner">
-                        <RcSearchPanel/>
-                        <RcTable/>
+                        <RcSingle/>
                     </div>
                 </div>
             </div>

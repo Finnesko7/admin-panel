@@ -1,10 +1,11 @@
 import React, {useEffect, useState, useRef} from "react";
 import {Card, CardBody, CardTitle, Col, Row, Table} from "reactstrap";
-import api from "../config/api";
-import Pagination from "./utils/Pagination";
+import api from "../../config/api";
+import Pagination from "../utils/Pagination";
 import {faCheckCircle, faTrash, faEdit} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useSelector} from "react-redux";
+import Link from "next/link";
 
 const pageSize = 10;
 
@@ -42,7 +43,7 @@ const RcTable = () => {
     useEffect(() => {
         getRealtyLis(page, pageSize, rcFilters).then(data => {
             allResult.current = data.count;
-            countPages.current = Math.ceil(Number(data.count/pageSize));
+            countPages.current = Math.ceil(Number(data.count / pageSize));
             setRcList(data.rows)
         })
     }, [setRcList, page, rcFilters])
@@ -71,13 +72,16 @@ const RcTable = () => {
                                             <td>{item.rcDeveloper.name_ru}</td>
                                             <td>{item.alias}</td>
                                             <td>{item.address_ru}</td>
-                                            <td>{item.is_active ? <FontAwesomeIcon color="primary" icon={faCheckCircle}/> : ''}</td>
+                                            <td>{item.is_active ?
+                                                <FontAwesomeIcon color="primary" icon={faCheckCircle}/> : ''}</td>
                                             <td>
-                                                <span className="icon-pointer" ><FontAwesomeIcon
-                                                    icon={faEdit} color="primary"/> </span>
+                                                <Link href="/rc/[pid]" as={`/rc/${item.id}`}>
+                                                    <span className="icon-pointer"><FontAwesomeIcon
+                                                        icon={faEdit} color="primary"/> </span>
+                                                </Link>
                                                 &nbsp;
-                                                <span className="icon-pointer"><FontAwesomeIcon icon={faTrash}
-                                                                                                color="Tomato"/> </span>
+                                                <span className="icon-pointer">
+                                                    <FontAwesomeIcon icon={faTrash} color="Tomato"/> </span>
                                             </td>
                                         </tr>
                                     )

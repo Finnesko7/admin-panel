@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import {debounce} from "lodash";
 import {Card, CardBody, UncontrolledButtonDropdown, Col, Input, Row, DropdownToggle,
     DropdownMenu, DropdownItem} from "reactstrap";
-import {setFilters} from "../lib/reducers/rc-filters";
+import {setFilters} from "../../lib/reducers/rc-filters";
 import {useDispatch} from 'react-redux';
 
 
