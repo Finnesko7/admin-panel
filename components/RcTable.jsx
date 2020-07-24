@@ -1,20 +1,30 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {Card, CardBody, CardTitle, Col, Row, Table} from "reactstrap";
 import api from "../config/api";
 import Pagination from "./utils/Pagination";
 import {faCheckCircle, faTrash, faEdit} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useSelector} from "react-redux";
 
 const pageSize = 10;
 
-const getRealtyLis = async (page, pageSize) => {
-    const res = await api(`/api/rc-list?page=${page}&pageSize=${pageSize}`)
+const getRealtyLis = async (page, pageSize, filters) => {
+    let url = `/api/rc-list?page=${page}&pageSize=${pageSize}`;
+    console.log("filters: ", filters)
+    if (filters.rcName) url += `&rcName=${filters.rcName}`
+    if (filters.devName) url += `&devName=${filters.devName}`
+    if (filters.address) url += `&address=${filters.address}`
+    if (filters.active) url += `&active=${filters.active}`
+    const res = await api(url)
     return await res.json();
 }
 
 const RcTable = () => {
     const [page, setPage] = useState(1)
     const [rcList, setRcList] = useState([])
+    const rcFilters = useSelector(state => state.rcFilters)
+    const countPages = useRef(1);
+    const allResult = useRef(0);
 
     const fields = [
         'Жилой комплекс',
@@ -30,11 +40,12 @@ const RcTable = () => {
     }
 
     useEffect(() => {
-        getRealtyLis(page, pageSize).then(data => {
-            data.rcList.countPages = data.countPages;
-            setRcList(data.rcList)
+        getRealtyLis(page, pageSize, rcFilters).then(data => {
+            allResult.current = data.count;
+            countPages.current = Math.ceil(Number(data.count/pageSize));
+            setRcList(data.rows)
         })
-    }, [setRcList, page])
+    }, [setRcList, page, rcFilters])
 
 
     return (
@@ -43,7 +54,9 @@ const RcTable = () => {
                 <Col lg="12">
                     <Card className="main-card mb-3">
                         <CardBody>
-                            <CardTitle>Список новостроек</CardTitle>
+                            <CardTitle>Всего результатов:
+                                {allResult.current}
+                            </CardTitle>
                             <Table hover className="mb-0">
                                 <thead>
                                 <tr>
@@ -53,7 +66,7 @@ const RcTable = () => {
                                 <tbody>
                                 {rcList.map(item => {
                                     return (
-                                        <tr>
+                                        <tr key={item.id}>
                                             <td>{item.name_ru}</td>
                                             <td>{item.rcDeveloper.name_ru}</td>
                                             <td>{item.alias}</td>
@@ -73,7 +86,7 @@ const RcTable = () => {
                             </Table>
                         </CardBody>
                         <Row className="justify-content-center">
-                            <Pagination callback={changePage} countPages={rcList.countPages} currentPage={page}/>
+                            <Pagination callback={changePage} countPages={countPages.current} currentPage={page}/>
                         </Row>
                     </Card>
                 </Col>

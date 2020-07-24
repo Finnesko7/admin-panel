@@ -1,6 +1,10 @@
 import React, {useRef, useState} from "react";
+import {debounce} from "lodash";
 import {Card, CardBody, UncontrolledButtonDropdown, Col, Input, Row, DropdownToggle,
     DropdownMenu, DropdownItem} from "reactstrap";
+import {setFilters} from "../lib/reducers/rc-filters";
+import {useDispatch} from 'react-redux';
+
 
 const RcSearchPanel = () => {
     const [textDropdown, setTextDropdown] = useState('Все')
@@ -8,10 +12,26 @@ const RcSearchPanel = () => {
     const devName = useRef('')
     const address = useRef('')
     const active = useRef('all')
+    const dispatch = useDispatch();
 
     const setActive = (text, system) => {
         setTextDropdown(text);
         active.current = system;
+        setRcFilters();
+    }
+
+    const debounceFilter = debounce(() => {
+        console.log("Call set filters")
+        setRcFilters();
+    }, 2000)
+
+    const setRcFilters = () => {
+        dispatch(setFilters({
+            rcName: rcName.current.value,
+            devName: devName.current.value,
+            address: address.current.value,
+            active: active.current
+        }))
     }
 
     return (
@@ -21,15 +41,15 @@ const RcSearchPanel = () => {
                     <CardBody>
                         <Row>
                             <Col md="3">
-                                <Input innerRef={rcName} type="text" placeholder="Название ЖК"/>
+                                <Input innerRef={rcName} onChange={debounceFilter} type="text" placeholder="Название ЖК"/>
                             </Col>
 
                             <Col md="3">
-                                <Input innerRef={devName} type="text" placeholder="Застройщик"/>
+                                <Input innerRef={devName} onChange={debounceFilter} type="text" placeholder="Застройщик"/>
                             </Col>
 
                             <Col md="4">
-                                <Input innerRef={address} type="text" placeholder="Адрес"/>
+                                <Input innerRef={address}  onChange={debounceFilter}type="text" placeholder="Адрес"/>
                             </Col>
                             <Col md="2">
                                 <UncontrolledButtonDropdown>

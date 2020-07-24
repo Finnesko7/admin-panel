@@ -17,6 +17,7 @@
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
+    "lodash": "^4.17.19",
     "mongoose": "^5.9.20",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
@@ -29,6 +30,7 @@
     "react-hamburgers": "^1.0.0",
     "react-metismenu": "^1.4.0",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-redux": "^7.2.0",
     "reactstrap": "^8.5.1",
     "sequelize": "^6.2.4"
   },
