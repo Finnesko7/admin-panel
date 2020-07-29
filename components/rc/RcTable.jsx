@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, useCallback} from "react";
 import {Card, CardBody, CardTitle, Col, Row, Table} from "reactstrap";
 import api from "../../config/api";
 import Pagination from "../utils/Pagination";
@@ -9,16 +9,6 @@ import Link from "next/link";
 
 const pageSize = 10;
 
-const getRealtyLis = async (page, pageSize, filters) => {
-    let url = `/api/rc-list?page=${page}&pageSize=${pageSize}`;
-    console.log("filters: ", filters)
-    if (filters.rcName) url += `&rcName=${filters.rcName}`
-    if (filters.devName) url += `&devName=${filters.devName}`
-    if (filters.address) url += `&address=${filters.address}`
-    if (filters.active) url += `&active=${filters.active}`
-    const res = await api(url)
-    return await res.json();
-}
 
 const RcTable = () => {
     const [page, setPage] = useState(1)
@@ -26,6 +16,17 @@ const RcTable = () => {
     const rcFilters = useSelector(state => state.rcFilters)
     const countPages = useRef(1);
     const allResult = useRef(0);
+
+    const getRealtyLis = useCallback( async (page, pageSize, filters) => {
+        let url = `/api/rc-list?page=${page}&pageSize=${pageSize}`;
+
+        if (filters.rcName) url += `&rcName=${filters.rcName}`
+        if (filters.devName) url += `&devName=${filters.devName}`
+        if (filters.address) url += `&address=${filters.address}`
+        if (filters.active) url += `&active=${filters.active}`
+        const res = await api(url)
+        return await res.json();
+    }, [page, rcFilters] );
 
     const fields = [
         'Жилой комплекс',
