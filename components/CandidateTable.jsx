@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, Suspense} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {Row, Col, Card, CardBody, CardTitle, Table} from "reactstrap";
 import api from "../config/api";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
